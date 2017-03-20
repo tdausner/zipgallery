@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+/*
+ * swiper control for zipGallery
+ *
+ * Copyright 2017 - TDSystem Beratung & Training Thomas Dausner
+ *
+ * 2017-02-27: v0.1 - initial release
+ */
+@media screen {
+	#zipGallery {
+		background: rgba(0, 0, 0, 0.8);
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 10000;
+	}
+    .swiper-zoom-container > canvas, .swiper-zoom-container > img, .swiper-zoom-container > svg {
+    	height: 100%;
+    	width: 100%;
+    }
+	#zipGallery div.text {
+		background-color: transparent;
+		position: absolute;
+		text-align: left;
+		width: 100%;
+		bottom: 0;
+		left: 0;
+    }
+	#zipGallery div.text p {
+		color: #fff;
+		padding: 12px;
+	}
+	#zipGallery div.text b {
+		font-weight: normal; 
+	}
+	#zipGallery div.text b.dim {
+		color: #606060;
+	}
+	#zipGallery div.close {
+		background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%3E%3Cpath%20stroke%3D%22%23FFF%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20d%3D%22m2.3,2.3%2015.3,15.3m0-15.3-15.3,15.3%22%2F%3E%3C%2Fsvg%3E");
+	    background-color: transparent;
+	    background-repeat: no-repeat;
+	    background-position: 10px;
+	    border: 2px solid #fff;
+	    border-radius: 22px;
+	    cursor: pointer;
+	    position: absolute;
+	    top: 10px;
+	    right: 10px;
+	    width: 40px;
+	    height: 40px;
+	    z-index: 10001;
+	}
+	#zipGallery a.download {
+		background-color: transparent;
+		border: 2px solid #fff;
+		border-radius: 10px;
+		bottom: 50px;
+		position: fixed;
+		padding: 10px 6px;
+		right: 10px;
+		top: initial;
+		transform: rotate(90deg) scale(1, 0.65);
+	}
+	#zipGallery div.swiper-button-white {
+	    background-color: transparent;
+	
+	}
+	#zipGallery .gallery-thumbs .swiper-slide {
+		border: 1px solid #000;
+		margin-left: -1px;
+	}
+	#zipGallery .gallery-thumbs .swiper-slide-active {
+		border-color: #fff;
+	    z-index: 2;
+	}
+}

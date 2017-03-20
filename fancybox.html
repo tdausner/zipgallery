@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="Keywords" content="zipGallery, ZIP, image gallery, TDSystem" >
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE9" />
+
+		<script type="text/javascript" src="../../concrete/js/jquery.js" ></script>
+
+		<style type="text/css">
+			/*
+			 * Styles for zipGallery test file
+			 */
+			 
+			* {
+			    margin: 0;
+			    padding: 0;
+			}
+			html, body { height: 100%; } 
+			body {
+			    background-color: #ffffff;
+			    color: inherit;
+			    font: 13px verdana,helvetica,clean,sans-serif;
+			    text-align: center;
+			}
+			div, h1, h2, h3, h4, h5, h6, p, a {
+			    background-color: inherit;
+			    color: #0e0e0e;
+			}
+			a, a:link, a:hover, a:visited {
+			    cursor: pointer;
+			    text-decoration: underline;
+			}
+		
+			#content {
+			    margin: 0 auto;
+			    padding: 10px;
+			    position: relative;
+			    text-align: left;
+			    width: 900px;
+			}
+			#sitetitle {
+			    border-bottom: 1px dotted #c0c0c0;
+			    height: 2.3em;
+			    margin-bottom: 10px;
+			    position: relative;
+			}
+			#sitetitle h1 {
+			    background-color: inherit;
+			    display: inline;
+			    float: left;
+			    font-size: 166.67%;
+			}
+			.section {
+			    display: inline-block;
+			    margin-bottom: 15px;
+			    width: 100%;
+			}
+			.section ul {
+			    margin: 0.5em 0 10px;
+			    padding-left: 1.2em;
+			}
+			.section li {
+			    padding-bottom: 10px;;
+			}
+			.section p, .section li {
+			    line-height: 160%;
+			}
+			.section hr { 
+				border: none; 
+				border-bottom: 1px dotted #c0c0c0;
+			}
+			span.toggle {
+				border: 1px solid #c0c0c0;
+				border-radius: 4px;
+				cursor: pointer;
+				padding: 5px;
+			}
+			
+		</style>
+
+		<!-- Add fancyBox main JS and CSS files -->
+		<script type="text/javascript" src="fancybox.3.0b/jquery.fancybox.js"></script>
+		<link rel="stylesheet" type="text/css" href="fancybox.3.0b/jquery.fancybox.css" media="screen" />
+
+		<!-- Add Thumbnail helper -->
+		<link rel="stylesheet" type="text/css" href="fancybox.3.0b/jquery.fancybox-thumbs.css" />
+		<script type="text/javascript" src="fancybox.3.0b/jquery.fancybox-thumbs.js"></script>
+
+		<!-- Add zipGallery JS and CSS files -->
+		<script type="text/javascript" src="js/zipGallery-fancybox.js"></script>
+		<link rel="stylesheet" type="text/css" media="screen" href="css/zipGallery-fancybox.css" />
+
+		<title>ZIP gallery for fancybox</title>
+		
+	</head>
+	<body>
+		<div id="content">
+			<div id="sitetitle">
+				<h1>ZIP gallery for fancybox</h1>
+			</div>
+			<div class="section">
+				<p>
+					ZipGallery is based on PHP code to extract a ZIP archive containing images of a gallery 
+					in conjunction with an AJAX driven front end. The image gallery itself is based on the 
+					<a href="http://www.fancyapps.com/fancybox/" target="_blank">fancybox</a> jQuery plugin.
+				</p>
+			</div>
+			<div class="section">
+				<p>
+					Click at one of the gallery links to see how things work!
+				</p>
+				<ul>
+					<li><a class="gallery" href="http://tdsystem.eu/external/zipgallery/galleries/gallery-1.zip">Test gallery one</a>
+						try &quot;gallery one&quot; localised <span class="toggle">en</span></li>
+					<li><a class="gallery" href="http://tdsystem.eu/external/zipgallery/galleries/gallery-2.zip"
+						   data-thumbsize="75x50"
+						   data-caption="{%title%&ensp;}{<b class='dim'>&copy;%copyright%</b>}">2nd test gallery</a></li>
+					<li><a class="gallery" href="http://tdsystem.eu/external/zipgallery/galleries/gallery-1.zip"
+						   data-caption="%localised% <b style='color: #ff8800;'>&copy;%copyright%</b>">1st gallery again</a></li>
+				</ul>
+				<p>Please note:</p>
+				<ul>
+					<li>The first link &quot;Test gallery one&quot; utilises standard caption and thumbnail size 
+						defined in JavaScript file <code><a href="js/zipGallery-fancybox.js" target="_blank">zipGallery-fancybox.js</a></code>:<br/>
+						<code>
+						&nbsp;&nbsp;dfltThumbSize = [50, 50];<br/>
+						&nbsp;&nbsp;dfltCaption = '{%localised%&amp;ensp;}{&lt;b class="dim">&amp;copy;%copyright%} - %filename%&lt;/b>';
+						</code>
+					</li>
+					<li>The second link has custom defined caption and thumbnail size:<br/>
+						<code>
+						&nbsp;&nbsp;data-thumbsize="75x50"<br/>
+						&nbsp;&nbsp;data-caption="{%title%&amp;ensp;}{&lt;b class='dim'>&amp;copy;%copyright%&lt;/b>}"
+						</code>
+					</li>
+					<li>The &quot;1st gallery again&quot; link sets a colour attribute to parts of the caption:<br/>
+						<code>
+						&nbsp;&nbsp;data-caption="%localised% &lt;b style='color: #ff8800;'>&amp;copy;%copyright%&lt;/b>"
+						</code>
+					</li>
+				</ul>
+				<br />
+				<hr />
+			</div>
+
+			<div class="section">
+				<a class="contact" href="mailto:info@tdsystem.eu">&copy; 2016 TDSystem Beratung &amp; Training</a>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+	(function($) {
+		$(document).ready(function() {
+			$('span.toggle').click(function(e) {
+				e.preventDefault();
+				var lang = $(this).text();
+				lang = (lang == 'en') ? 'de' : 'en';
+				$('html').attr('lang', lang)
+				$(this).text(lang);
+			});
+		});
+	}) (window.jQuery);
+	</script>
+</html>
