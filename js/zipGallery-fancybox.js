@@ -1,5 +1,5 @@
 /**
- * fancybox controller jQuery JavaScript Library for zipgallery
+ * fancybox controller jQuery library for ZIP Image Gallery
  *
  * Copyright 2016, 2017 - TDSystem Beratung & Training, Thomas Dausner
  */

@@ -60,10 +60,14 @@
 		border-radius: 10px;
 		bottom: 50px;
 		position: fixed;
-		padding: 10px 6px;
+	    height: 63px;
 		right: 10px;
 		top: initial;
 		transform: rotate(90deg) scale(1, 0.65);
+		width: 39px;
+	}
+	#zipGallery a.download.no-thumbs {
+		bottom: 0;
 	}
 	#zipGallery div.swiper-button-white {
 	    background-color: transparent;

@@ -1,5 +1,5 @@
 /**
- * swiper controller jQuery JavaScript Library for zipgallery
+ * swiper controller jQuery library for ZIP Image Gallery
  *
  * Copyright 2017 - TDSystem Beratung & Training, Thomas Dausner
  */
@@ -90,10 +90,14 @@
 		var thumbsHeight = thumbNails.height + thumbsBorders;
     	var vp = {};
 	    var alignGeometry = function(thumbsOff) {
-	    	if (thumbsOff === true)
+	    	if (thumbsOff === true) {
 	    		thumbsHeight = 0;
-	    	else if (thumbsOff === false)
+	    		$('a.download').addClass('no-thumbs');
+	    	}
+	    	else if (thumbsOff === false) {
 	    		thumbsHeight = thumbNails.height + thumbsBorders;
+	    		$('a.download').removeClass('no-thumbs');
+	    	}
 	    	vp = {
         		fullHeight: document.documentElement.clientHeight,
         		width:      document.documentElement.clientWidth
@@ -157,6 +161,16 @@
 			var zipUrl = $a.attr('href');
 			var galleryName = zipUrl.replace('.zip', ''); 
 			$a.attr('href', galleryName);
+			//
+			// initilaisation of caption and thumbs
+			//
+			var captionTpl = $a.data('caption') === undefined ? dfltCaption : $a.data('caption');
+			var tns = dfltThumbSize;
+			if ($a.data('thumbsize') !== undefined) {
+				tns = $a.data('thumbsize').split('x');
+			}
+			thumbNails.width  = parseInt(tns[0]);
+			thumbNails.height = parseInt(tns[1]);
 			var download = isMobile() ? '<a class="download swiper-button-next swiper-button-white">&nbsp;</a>' : '';
 			//
 			// set click handler
@@ -164,13 +178,6 @@
 			$a.click(function(e) {
 				e.preventDefault();
 				setFullScreen(true);
-				var captionTpl = $a.data('caption') === undefined ? dfltCaption : $a.data('caption');
-				var tns = dfltThumbSize;
-				if ($a.data('thumbsize') !== undefined) {
-					tns = $a.data('thumbsize').split('x');
-				}
-				thumbNails.width  = parseInt(tns[0]);
-				thumbNails.height = parseInt(tns[1]);
 				//
 				// get info
 				//
@@ -240,7 +247,7 @@
 									.append('<div class="swiper-slide" style="' + thStyle 
 												+ ' background-image:url(' + zipUrl + '/' + info[idx].name + thumbs + ')"></div>')
 							}
-							alignGeometry();
+							alignGeometry(false);
 							/*
 							 * open image gallery 
 							 */

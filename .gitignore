@@ -1,3 +1,7 @@
+# ZIP image gallery files et. al.
+*.zip
+*excerpt.*
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
