@@ -1,4 +1,0 @@
-RewriteEngine On
-RewriteCond %{REQUEST_URI} ^(.*)/(.+\.zip)/(.+)$
-RewriteCond %{DOCUMENT_ROOT}%1/%2 -f
-RewriteRule . /external/zipgallery/galleries.php?zip=%1/%2&file=%3 [L,QSA]

@@ -2,7 +2,7 @@
 /**
  * galleries.php
  *
- * Copyright 2016, 2017 - TDSystem Beratung & Training - Thomas Dausner (aka dausi)
+ * Copyright 2016, 2017, 2020 - TDSystem Thomas Dausner
  */
 
 spl_autoload_register(function($classname) {
@@ -16,7 +16,7 @@ spl_autoload_call('ZipGalleryCache');
 function getZipGalleryCacheConfig()
 {
 	return [
-		'cacheRoot' => dirname(dirname(dirname(__FILE__))) . '/application/files/zip_cache',
+		'cacheRoot' => dirname(__FILE__) . DIRECTORY_SEPARATOR . 'zip_cache',
 		'cacheEntries' => 10000
 	];
 }

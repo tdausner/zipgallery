@@ -2,13 +2,13 @@
 /**
  * Class ZipGalleryCache
  *
- * implemantation of a simple cache.
+ * implementation of a simple cache.
  *
- * Copyright 2016, 2017 - TDSystem Beratung & Training - Thomas Dausner (aka dausi)
+ * Copyright 2016, 2017, 2020 - TDSystem Thomas Dausner
  *
  * Configuration data for cache:
  *	[
- *		'cacheRoot' => dirname(dirname(dirname(__FILE__))) . '/application/files/zip_cache',
+ *		'cacheRoot' => DIRECTORY_SEPARATOR . 'zip_cache',
  *		'cacheEntries' => 10000
  *	];
  *
@@ -48,13 +48,13 @@ class ZipGalleryCache
 
 	/*
 	 * get entry from cache.
-	 * entry found but older than 'oldest' is umlinked.
+	 * entry found but older than 'oldest' is unlinked.
 	 *
 	 * @return null or content
 	 */
 	public function getEntry($oldest, $cacheName)
 	{
-		$cacheEntry = $this->cacheFolder . '/' . str_replace('/', '#', $cacheName);
+		$cacheEntry = $this->cacheFolder . DIRECTORY_SEPARATOR . str_replace('/', '#', $cacheName);
 		$data = null;
 		$cStat = @stat($cacheEntry);
 		if (is_array($cStat))
@@ -79,7 +79,7 @@ class ZipGalleryCache
 	 */
 	public function setEntry($cacheName, $data)
 	{
-		$cacheEntry = $this->cacheFolder . '/' . str_replace('/', '#', $cacheName);
+		$cacheEntry = $this->cacheFolder . DIRECTORY_SEPARATOR . str_replace('/', '#', $cacheName);
 		if (preg_match($this->ignorePattern, $cacheEntry) === 0)
 		{
 			$dirEntries = scandir($this->cacheFolder);
@@ -107,7 +107,7 @@ class ZipGalleryCache
 				// first $entries are '.' and '..'
 				for ($i = 2; $i < count($entries); $i++)
 				{
-					$times[stat($this->cacheFolder . '/' . $entries[$i])['mtime']] = $entries[$i];
+					$times[stat($this->cacheFolder . DIRECTORY_SEPARATOR . $entries[$i])['mtime']] = $entries[$i];
 				}
 				ksort($times);
 				// first entry keeps oldest file
@@ -115,7 +115,7 @@ class ZipGalleryCache
 				{
 					if ($filename != $cacheName)
 					{
-						unlink($this->cacheFolder . '/' . $filename);
+						unlink($this->cacheFolder . DIRECTORY_SEPARATOR . $filename);
 						break;
 					}
 				}

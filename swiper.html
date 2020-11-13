@@ -5,7 +5,7 @@
 		<meta name="Keywords" content="zipGallery, ZIP, image gallery, TDSystem" >
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
 
-		<script type="text/javascript" src="../../concrete/js/jquery.js" ></script>
+		<script type="text/javascript" src="js/jquery1.12.2.js" ></script>
 
 		<style type="text/css">
 			/*
@@ -107,12 +107,12 @@
 					Click at one of the gallery links to see how things work!
 				</p>
 				<ul>
-					<li><a class="gallery" href="http://tdsystem.eu/external/zipgallery/galleries/gallery-1.zip">Test gallery one</a>
+					<li><a class="gallery" href="/galleries/gallery-1.zip">Test gallery one</a>
 						try &quot;gallery one&quot; localised <span class="toggle">en</span></li>
-					<li><a class="gallery" href="http://tdsystem.eu/external/zipgallery/galleries/gallery-2.zip"
+					<li><a class="gallery" href="/galleries/gallery-2.zip"
 						   data-thumbsize="75x50"
 						   data-caption="{%title%&ensp;}{<b class='dim'>&copy;%copyright%</b>}">2nd test gallery</a></li>
-					<li><a class="gallery" href="http://tdsystem.eu/external/zipgallery/galleries/fat-gallery.zip"
+					<li><a class="gallery" href="/galleries/fat-gallery.zip"
 						   data-caption="%localised% <b style='color: #ff8800;'>&copy;%copyright%</b>">fat gallery</a></li>
 				</ul>
 				<p>Please note:</p>
@@ -141,7 +141,7 @@
 			</div>
 
 			<div class="section">
-				<a class="contact" href="mailto:info@tdsystem.eu">&copy; 2016 TDSystem Beratung &amp; Training</a>
+				<a class="contact" href="mailto:info@tdsystem.eu">&copy; 2016, 2020 TDSystem</a>
 			</div>
 		</div>
 
@@ -151,8 +151,8 @@
 		$(document).ready(function() {
 			$('span.toggle').click(function(e) {
 				e.preventDefault();
-				var lang = $(this).text();
-				lang = (lang == 'en') ? 'de' : 'en';
+				let lang = $(this).text();
+				lang = (lang === 'en') ? 'de' : 'en';
 				$('html').attr('lang', lang)
 				$(this).text(lang);
 			});

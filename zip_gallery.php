@@ -4,7 +4,7 @@
  *
  * A representation of a gallery from a ZIP archive
  *
- * Copyright 2016, 2017 - TDSystem Beratung & Training - Thomas Dausner (aka dausi)
+ * Copyright 2016, 2017, 2020 - TDSystem Thomas Dausner
  */
 class ZipGallery extends ZipArchive
 {
@@ -15,6 +15,7 @@ class ZipGallery extends ZipArchive
 	protected $cacheNamePrefix;
 	protected $zip;
 	protected $entries;
+	protected $media;
 	protected $iptcFields = [
 	    '2#005' => 'title',
 	    '2#010' => 'urgency',
@@ -46,14 +47,14 @@ class ZipGallery extends ZipArchive
 	{
 		$this->entries = 0;
 		$this->zipFilename = $zipFilename;
-		$pathToZip = $_SERVER['DOCUMENT_ROOT'] . '/' . $zipFilename;
+		$pathToZip = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $zipFilename;
 		$this->zip = new ZipArchive;
 		if ($this->zip->open($pathToZip) == true)
 		{
 			$this->zipStat = stat($pathToZip);
 			$this->entries = $this->zip->numFiles;
 			$this->cache = new ZipGalleryCache;
-			$this->cacheNamePrefix = ltrim($this->zipFilename, '/') . '/';
+			$this->cacheNamePrefix = ltrim($this->zipFilename, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
 			$this->cache->setIgnorePattern('/\.json$/');
 		}
 	}
@@ -67,6 +68,7 @@ class ZipGallery extends ZipArchive
      * Returns data or FALSE.
      *
      * @param string filename
+     * @return string
      */
 	public function getFromZip($filename)
 	{
@@ -83,6 +85,7 @@ class ZipGallery extends ZipArchive
      * Returns data or null.
      *
      * @param string filename
+     * @return null|string
      */
 	private function getFromCache($filename)
 	{
@@ -96,6 +99,8 @@ class ZipGallery extends ZipArchive
 	}
 	/**
      * Get entries from ZIP archive as JSON array
+     * 
+     * @return string
      */
 	public function getInfo()
 	{
@@ -107,7 +112,7 @@ class ZipGallery extends ZipArchive
 			{
 				// ZIP file info is not in cache, generate and set into cache
 				$entryNum = 0;
-				$finfo = new finfo(FILEINFO_NONE);
+				$fileInfo = new finfo(FILEINFO_NONE);
 				for ($i = 0; $i < $this->zip->numFiles; $i++)
 				{
 					$stat = $this->zip->statIndex($i);
@@ -123,7 +128,7 @@ class ZipGallery extends ZipArchive
 						];
 						if (($exif = exif_read_data('data://image/jpeg;base64,'.base64_encode($data), null, true)) !== false)
 						{
-							$size = getimagesizefromstring($data, $imgInfo);
+							getimagesizefromstring($data, $imgInfo);
 							if (isset($imgInfo['APP13']))
 							{
 								$iptc = iptcparse($imgInfo['APP13']);
@@ -139,7 +144,7 @@ class ZipGallery extends ZipArchive
 						{
 							foreach ($exValue as $key => $value)
 							{
-								if (is_array($value) || $finfo->buffer($value) != 'data')
+								if (is_array($value) || $fileInfo->buffer($value) != 'data')
 								{
 									$exifData[$exKey][$key] = $value;
 								}
@@ -172,6 +177,7 @@ class ZipGallery extends ZipArchive
      * @param string filename
      * @param int new_width
      * @param int new_height
+     * @return string
      */
 	public function getThumb($filename, $new_width, $new_height)
 	{
@@ -209,11 +215,11 @@ class ZipGallery extends ZipArchive
 						$height = $width;
 					}
 				}
-				$tnail = imagecreatetruecolor($new_width, $new_height);
-				imagecopyresampled($tnail, $im, 0, 0, $x, $y, $new_width, $new_height, $width, $height);
+				$thumbNail = imagecreatetruecolor($new_width, $new_height);
+				imagecopyresampled($thumbNail, $im, 0, 0, $x, $y, $new_width, $new_height, $width, $height);
 
 				ob_start();
-				if (imagejpeg($tnail, null))
+				if (imagejpeg($thumbNail, null))
 				{
 					$data = ob_get_contents();
 					$this->cache->setEntry($this->cacheNamePrefix . $tnFilename, $data);
