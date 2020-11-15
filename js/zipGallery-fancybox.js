@@ -180,7 +180,7 @@
                                 }
                                 info[idx].iptc['localised'] = localised;
                                 gallery[idx] = new Object({
-                                    href: '/galleries.php?zip=' + zipUrl + '&file=' + info[idx].name,
+                                    href: 'galleries.php?zip=' + zipUrl + '&file=' + info[idx].name,
                                     title: get_title(info[idx].iptc, captionTpl)
                                 });
                             }

@@ -47,7 +47,7 @@ class ZipGallery extends ZipArchive
 	{
 		$this->entries = 0;
 		$this->zipFilename = $zipFilename;
-		$pathToZip = $_SERVER['DOCUMENT_ROOT'] . DIRECTORY_SEPARATOR . $zipFilename;
+		$pathToZip = dirname(__FILE__) . DIRECTORY_SEPARATOR . $zipFilename;
 		$this->zip = new ZipArchive;
 		if ($this->zip->open($pathToZip) == true)
 		{

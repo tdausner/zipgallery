@@ -269,7 +269,7 @@
                                 $('.gallery-top .swiper-wrapper')
                                     .append('<div class="swiper-slide swiper-zoom-container" '
                                         + 'data-height="' + comp.Height + '" data-width="' + comp.Width + '">'
-                                        + '<img alt="" data-src="/galleries.php?zip=' + zipUrl + '&file=' + info[idx].name + '" class="swiper-lazy">'
+                                        + '<img alt="" data-src="galleries.php?zip=' + zipUrl + '&file=' + info[idx].name + '" class="swiper-lazy">'
                                         + '<div class="swiper-lazy-preloader"></div>'
                                         + '<div class="text">'
                                         + '<p>' + get_title(info[idx].iptc, captionTpl) + '</p>'
@@ -278,7 +278,7 @@
                                     );
                                 $('.gallery-thumbs .swiper-wrapper')
                                     .append('<div class="swiper-slide" style="' + thStyle
-                                        + ' background-image:url(/galleries.php?zip=' + zipUrl + '&file=' + info[idx].name + thumbs + ')"></div>')
+                                        + ' background-image:url(galleries.php?zip=' + zipUrl + '&file=' + info[idx].name + thumbs + ')"></div>')
                             }
                             alignGeometry(false);
                             /*
