@@ -36,7 +36,7 @@
                     width: 50, // set to -1 for flexible width
                     height: 50,
                     source: function (item) {
-                        return item.href + '?thumb=true&tnw=' + fcbOptions.helpers.thumbs.width
+                        return item.href + '&thumb=true&tnw=' + fcbOptions.helpers.thumbs.width
                             + '&tnh=' + fcbOptions.helpers.thumbs.height;
                     }
                 }
