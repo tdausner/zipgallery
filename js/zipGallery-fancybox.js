@@ -138,7 +138,7 @@
                 $('body, a').css('cursor', 'progress');
                 $.ajax({
                     type: 'GET',
-                    url: '/galleries.php?zip=' + zipUrl + '&info=true',
+                    url: 'galleries.php?zip=' + zipUrl + '&info=true',
                     dataType: 'json',
                     success: function (info) {
                         $('body, a').css('cursor', '');
